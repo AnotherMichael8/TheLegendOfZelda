@@ -4,10 +4,11 @@ using Sprint2_Attempt3.Player.Interfaces;
 using Sprint2_Attempt3.Player.LinkStates;
 using System.Collections.Generic;
 using Sprint2_Attempt3.Collision;
-using Sprint2_Attempt3.CommandClasses;
 using Sprint2_Attempt3.Collision.SideCollisionHandlers;
 using Sprint2_Attempt3.Dungeon;
 using Sprint2_Attempt3.Dungeon.Rooms;
+using Sprint2_Attempt3.CommandClasses.LinkCommands;
+
 namespace Sprint2_Attempt3.Player
 {
     public class Link : ILink

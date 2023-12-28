@@ -123,6 +123,13 @@ namespace Sprint2_Attempt3.Sounds
             Instance.rickRollMusic.Stop();
             Instance.backgroundMusic.Resume();
         }
+        public static void PauseMusic()
+        {
+            Instance.titleScreenMusic.Pause();
+            Instance.undertaleMusic.Pause();
+            Instance.rickRollMusic.Stop();
+            Instance.backgroundMusic.Pause();
+        }
 
     }
 }

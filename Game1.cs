@@ -12,6 +12,7 @@ using Sprint2_Attempt3.Inventory;
 using Sprint2_Attempt3.Sounds;
 using Sprint2_Attempt3.Screens;
 using Sprint2_Attempt3.Portal;
+using Sprint2_Attempt3.Controllers;
 
 namespace Sprint2_Attempt3
 {
@@ -29,12 +30,12 @@ namespace Sprint2_Attempt3
         }
         public GameState gameState { get; set; }
         public static Texture2D InventoryTexture { get; set; }
-        private KeyboardController keyController { get; set; }
+        public IController Controller { get; set; }
         private MouseController mouseController { get; set; }
         private InventoryController inventoryController { get; set; }
         public ILink link { get; set; }
         public IRoom room { get; set; }
-        public ISprite screenSprite { get; set; }
+        public IScreenSprite screenSprite { get; set; }
         public bool gamePaused { get; set; }
         public bool deathAnimationActive { get; set; }
 
@@ -81,7 +82,7 @@ namespace Sprint2_Attempt3
             screenSprite = ScreenSpriteFactory.Instance.CreateStartScreen();
             inventoryController = new InventoryController(this);
             room = RoomSecondary.LoadRooms(this);
-            keyController = new KeyboardController(this);
+            Controller = new TitleScreenController(this);
             mouseController = new MouseController(this);
             deathAnimationActive = false;
         }
@@ -96,7 +97,7 @@ namespace Sprint2_Attempt3
 
         protected override void Update(GameTime gameTime)
         {
-            keyController.Update(gameTime);
+            Controller.Update(gameTime);
             switch (gameState)
             {
                 case GameState.start:

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint2_Attempt3.CommandClasses;
+using Sprint2_Attempt3.CommandClasses.InventoryCommands;
+using Sprint2_Attempt3.CommandClasses.LinkCommands;
 using Sprint2_Attempt3.Items;
 using Sprint2_Attempt3.Items.ItemSprites;
 using System;

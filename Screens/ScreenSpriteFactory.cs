@@ -13,6 +13,7 @@ namespace Sprint2_Attempt3.Screens
     {
         private static Texture2D startScreenTexture;
         private static Texture2D deathAndPauseScreenTexture;
+        private static Texture2D selectorTexture;
         // More private Texture2Ds follow
         // ...
 
@@ -34,22 +35,23 @@ namespace Sprint2_Attempt3.Screens
         {
             startScreenTexture = content.Load<Texture2D>("TitleScreen");
             deathAndPauseScreenTexture = content.Load<Texture2D>("DeathAndPauseScreen");
+            selectorTexture = content.Load<Texture2D>("FileSelection");
         }
-        public ISprite CreateStartScreen()
+        public IScreenSprite CreateStartScreen()
         {
-            return new StartScreenSprite(startScreenTexture);
+            return new StartScreenSprite(startScreenTexture, selectorTexture);
         }
-        public ISprite CreateDeathScreen()
+        public IScreenSprite CreateDeathScreen()
         {
-            return new DeathScreenSprite(deathAndPauseScreenTexture); 
+            return new DeathScreenSprite(deathAndPauseScreenTexture, selectorTexture); 
         }
-        public ISprite CreatePauseScreen()
+        public IScreenSprite CreatePauseScreen()
         {
-            return new PauseScreenSprite(deathAndPauseScreenTexture);
+            return new PauseScreenSprite(deathAndPauseScreenTexture, selectorTexture);
         }
-        public ISprite CreateChooseFileScreen()
+        public IScreenSprite CreateChooseFileScreen()
         {
-            return new ChooseFileScreenSprite(deathAndPauseScreenTexture);
+            return new ChooseFileScreenSprite(deathAndPauseScreenTexture, selectorTexture);
         }
     }
 }

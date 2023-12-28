@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Sprint2_Attempt3.Screens
 {
-    public class PauseScreenSprite : ISprite
+    public class PauseScreenSprite : IScreenSprite
     {
         private Texture2D texture;
         private Rectangle sourceRectangle;
         private Rectangle destinationRectangle;
-        public PauseScreenSprite(Texture2D texture)
+        public PauseScreenSprite(Texture2D texture, Texture2D selectorTexture)
         {
             this.texture = texture;
             sourceRectangle = new Rectangle(638, 12, 300, 196);
@@ -26,6 +26,26 @@ namespace Sprint2_Attempt3.Screens
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
+        }
+
+        public void MoveSelectorUp()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MoveSelectorDown()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MoveSelectorLeft()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MoveSelectorRight()
+        {
+            throw new NotImplementedException();
         }
     }
 }

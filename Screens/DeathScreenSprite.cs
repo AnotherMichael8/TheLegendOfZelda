@@ -9,12 +9,12 @@ using System.ComponentModel;
 
 namespace Sprint2_Attempt3.Screens
 {
-    public class DeathScreenSprite : ISprite
+    public class DeathScreenSprite : IScreenSprite
     {
         private Texture2D texture;
         private Rectangle sourceRectangle;
         private Rectangle destinationRectangle;
-        public DeathScreenSprite(Texture2D texture)
+        public DeathScreenSprite(Texture2D texture, Texture2D selectorTexture)
         {
             this.texture = texture;
             sourceRectangle = new Rectangle(280, 270, 300, 245);
@@ -27,5 +27,24 @@ namespace Sprint2_Attempt3.Screens
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
         }
 
+        public void MoveSelectorUp()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MoveSelectorDown()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MoveSelectorLeft()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MoveSelectorRight()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
