@@ -1,0 +1,13 @@
+﻿Item,Key,512,347,FALSE
+Door,North,0,,
+Door,South,4,,
+Door,East,0,,
+Door,West,4,,
+Portal,35,63,,
+Enemy,Keese,9,,
+Enemy,Keese,37,,
+Enemy,Keese,81,,
+Enemy,Rope,31,,
+Enemy,Zol,29,,
+Enemy,Dodongo,33,,
+Item,Clock,200,400,true

@@ -1,0 +1,13 @@
+﻿Block,DiamondTile,27,,
+Block,DiamondTile,51,,
+Block,DiamondTile,34,,
+Block,DiamondTile,58,,
+Item,Boomerang,415,165,FALSE
+Item,Rupee,0,0,FALSE
+Door,North,4,,
+Door,South,5,,
+Door,East,1,,
+Door,West,0,,
+Enemy,Goriya,23,,
+Enemy,Goriya,57,,
+Enemy,Goriya,71,,

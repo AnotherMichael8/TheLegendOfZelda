@@ -1,0 +1,8 @@
+﻿Door,North,4,
+Door,South,1,
+Door,East,0,
+Door,West,2,
+Enemy,Gel,29,,
+Enemy,Gel,32,,
+Enemy,Gel,43,,
+Block,Room9MovingBlock,42,
