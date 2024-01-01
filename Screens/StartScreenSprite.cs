@@ -22,29 +22,9 @@ namespace Sprint2_Attempt3.Screens
         }
         public void Update() { }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, Rectangle selectorDestinationRectangles)
         {
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
-        }
-
-        public void MoveSelectorUp()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void MoveSelectorDown()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void MoveSelectorLeft()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void MoveSelectorRight()
-        {
-            throw new NotImplementedException();
         }
     }
 }

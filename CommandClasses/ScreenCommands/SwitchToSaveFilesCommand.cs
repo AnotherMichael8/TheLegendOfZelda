@@ -25,7 +25,7 @@ namespace Sprint2_Attempt3.CommandClasses.ScreenCommands
             SoundFactory.PauseMusic();
             SoundFactory.Instance.backgroundMusic.Resume();
             game1.gameState = Game1.GameState.chooseFile;
-            game1.screenSprite = ScreenSpriteFactory.Instance.CreateChooseFileScreen();
+            game1.screen = new ChooseFileScreen(game1);
         }
     }
 }

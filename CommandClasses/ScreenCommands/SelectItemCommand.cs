@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 
 namespace Sprint2_Attempt3.CommandClasses.ScreenCommands
 {
-    public class MoveSelectorDownCommand : ICommand
+    public class SelectItemCommand : ICommand
     {
-        private Game1 game;
-        public MoveSelectorDownCommand(Game1 game)
+        private Game1 game1;
+        public SelectItemCommand(Game1 game)
         {
-            this.game = game;
+            this.game1 = game;
         }
+
         public void Execute()
         {
-            game.screen.MoveSelectorDown();
+            game1.screen.SelectInstance();
         }
     }
 }

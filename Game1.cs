@@ -35,7 +35,7 @@ namespace Sprint2_Attempt3
         private InventoryController inventoryController { get; set; }
         public ILink link { get; set; }
         public IRoom room { get; set; }
-        public IScreenSprite screenSprite { get; set; }
+        public IScreen screen { get; set; }
         public bool gamePaused { get; set; }
         public bool deathAnimationActive { get; set; }
 
@@ -79,7 +79,7 @@ namespace Sprint2_Attempt3
             link = new Link(this);
             collisionManager = new CollisionManager(this, (Link)link);
             gameState = GameState.startScreen;
-            screenSprite = ScreenSpriteFactory.Instance.CreateStartScreen();
+            screen = new StartScreen(this);
             inventoryController = new InventoryController(this);
             room = RoomSecondary.LoadRooms(this);
             Controller = new TitleScreenController(this);
@@ -139,7 +139,7 @@ namespace Sprint2_Attempt3
                     inventoryController.Draw(spriteBatch);
                     break;
                 default:
-                    screenSprite.Draw(spriteBatch);
+                    screen.Draw(spriteBatch);
                     break;
 
             }

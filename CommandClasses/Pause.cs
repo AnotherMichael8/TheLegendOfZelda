@@ -19,7 +19,7 @@ namespace Sprint2_Attempt3.CommandClasses
         public void Execute()
         {
             game1.gameState = Game1.GameState.pause;
-            game1.screenSprite = ScreenSpriteFactory.Instance.CreatePauseScreen();
+            //game1.screen = ScreenSpriteFactory.Instance.CreatePauseScreen();
         }
     }
 }

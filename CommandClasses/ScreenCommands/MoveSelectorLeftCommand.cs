@@ -16,7 +16,7 @@ namespace Sprint2_Attempt3.CommandClasses.ScreenCommands
         }
         public void Execute()
         {
-            game.screenSprite.MoveSelectorLeft();
+            game.screen.MoveSelectorLeft();
         }
     }
 }

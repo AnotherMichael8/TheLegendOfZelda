@@ -34,6 +34,7 @@ namespace Sprint2_Attempt3.Controllers
             commandMapping.Add(Keys.Left, new MoveSelectorLeftCommand(game1));
             commandMapping.Add(Keys.Down, new MoveSelectorDownCommand(game1));
             commandMapping.Add(Keys.Right, new MoveSelectorRightCommand(game1));
+            commandMapping.Add(Keys.Enter, new SelectItemCommand(game1));
         }
         public void Update(GameTime gameTime)
         {

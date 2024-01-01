@@ -1,11 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using System;
+using Sprint2_Attempt3.CommandClasses.ScreenCommands;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Intrinsics.Arm;
-using System.Text;
-using System.Threading.Tasks;
 using Sprint2_Attempt3.Player.Interfaces;
 using Sprint2_Attempt3.Collision;
 using Sprint2_Attempt3.Inventory;
@@ -126,8 +122,7 @@ namespace Sprint2_Attempt3.Player
             }
             else if (timer == 160)
             {
-                game.gameState = Game1.GameState.linkDead;
-                game.screenSprite = ScreenSpriteFactory.Instance.CreateDeathScreen();
+                new SwitchToDeathCommand(game).Execute();
             }
             decoratedLink.Update();
         }
