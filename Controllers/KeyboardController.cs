@@ -42,7 +42,7 @@ namespace Sprint2_Attempt3.Controllers
 
             //other controls
             commandMapping.Add(Keys.Q, new Quit(game1));
-            commandMapping.Add(Keys.R, new Reset(game1, game1.room));
+            commandMapping.Add(Keys.R, new Reset(game1));
             commandMapping.Add(Keys.Escape, new Pause(game1));
             commandMapping.Add(Keys.Space, new ToggleItemMenu(game1));
 

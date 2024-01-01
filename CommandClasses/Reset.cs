@@ -1,4 +1,5 @@
 ﻿using Sprint2_Attempt3.Collision;
+using Sprint2_Attempt3.Controllers;
 using Sprint2_Attempt3.Dungeon;
 using Sprint2_Attempt3.Dungeon.Rooms;
 using Sprint2_Attempt3.Enemy.Keese;
@@ -14,11 +15,9 @@ namespace Sprint2_Attempt3.CommandClasses
     internal class Reset : ICommand
     {
         private Game1 game1;
-        private IRoom room;
 
-        public Reset(Game1 game, IRoom room) { 
+        public Reset(Game1 game) { 
             this.game1= game;
-            this.room = room;
         }
 
         public void Execute()
@@ -26,7 +25,7 @@ namespace Sprint2_Attempt3.CommandClasses
             PanningTransitionHandler.Instance.TransitionGameObjectList = new List<IGameObject>();
             InventoryController.Reset();
             game1.Reset();
-            room.ResetRooms();
+            game1.room.ResetRooms();
             SoundFactory.ResetSounds();
             PanningTransitionHandler.Instance.Start = false;
             FadingTransitionHandler.Instance.Start = false;

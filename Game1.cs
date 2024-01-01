@@ -93,6 +93,7 @@ namespace Sprint2_Attempt3
             gameState = GameState.start;
             deathAnimationActive = false;
             collisionManager = new CollisionManager(this, (Link)link);
+            Controller = new KeyboardController(this);
         }
 
         protected override void Update(GameTime gameTime)

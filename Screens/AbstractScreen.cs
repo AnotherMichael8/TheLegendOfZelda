@@ -11,27 +11,58 @@ namespace Sprint2_Attempt3.Screens
 {
     public abstract class AbstractScreen : IScreen
     {
-        protected Rectangle[] selectorDestinationRectangles1D = null;
-        protected Rectangle[][] selectorDestinationRectangles2D = null;
-        protected int selectorPositionX;
-        protected int selectorPositionY;
+        private Rectangle[][] selectorDestinationRectangles = null;
+        private int selectorPositionX = 0;
+        private int selectorPositionY = 0;
         protected IScreenSprite screenSprite;
+        protected enum SelectorDirection { Horizontal,  Vertical };
+
+        protected int[] GetSelectorsPosition()
+        {
+            return new int[] { selectorPositionX, selectorPositionY }; 
+        }
+        protected int GetSelectorsPosition(SelectorDirection direction)
+        {
+            if (direction == SelectorDirection.Horizontal)
+                return selectorPositionX;
+            else
+                return selectorPositionY;
+        }
+        protected void Create1DSelector(Rectangle[] selectorPositions, SelectorDirection direction)
+        {
+            switch (direction)
+            {
+                case SelectorDirection.Horizontal:
+                    selectorDestinationRectangles = new Rectangle[1][];
+                    selectorDestinationRectangles[0] = selectorPositions;
+                    break;
+                case SelectorDirection.Vertical:
+                    selectorDestinationRectangles = new Rectangle[selectorPositions.Length][];
+                    for (int i = 0; i < selectorPositions.Length; i++)
+                        selectorDestinationRectangles[i] = new Rectangle[] { selectorPositions[i] };
+                    break;
+            }
+        }
+        protected void Create2DSelector(Rectangle[][] selectorPositions)
+        {
+            selectorDestinationRectangles = selectorPositions;
+        }
 
         public void MoveSelectorUp() 
         {
-            if(selectorDestinationRectangles2D != null)
+            if(selectorDestinationRectangles != null)
             {
                 if (selectorPositionY != 0)
                     selectorPositionY--;
                 else
-                    selectorPositionY = selectorDestinationRectangles2D.Length - 1;
+                    selectorPositionY = selectorDestinationRectangles.Length - 1;
             }
         }
         public void MoveSelectorDown() 
         {
-            if (selectorDestinationRectangles2D != null)
+            if (selectorDestinationRectangles != null)
             {
-                if (selectorPositionY != selectorDestinationRectangles2D.Length - 1)
+                if (selectorPositionY != selectorDestinationRectangles.Length - 1)
                     selectorPositionY++;
                 else
                     selectorPositionY = 0;
@@ -39,31 +70,30 @@ namespace Sprint2_Attempt3.Screens
         }
         public void MoveSelectorLeft()
         {
-            if (selectorPositionX != 0)
-                selectorPositionX--;
-            else
+            if (selectorDestinationRectangles != null)
             {
-                if (selectorDestinationRectangles1D != null)
-                    selectorPositionX = selectorDestinationRectangles1D.Length - 1;
+                if (selectorPositionX != 0)
+                    selectorPositionX--;
                 else
-                    selectorPositionX = selectorDestinationRectangles2D.Length - 1;
+                    selectorPositionX = selectorDestinationRectangles[0].Length - 1;
             }
         }
         public void MoveSelectorRight()
         {
-            if (selectorDestinationRectangles1D != null && selectorPositionX != selectorDestinationRectangles1D.Length - 1)
-                selectorPositionX++;
-            else if (selectorDestinationRectangles2D != null && selectorPositionX != selectorDestinationRectangles2D.Length - 1)
-                selectorPositionX++;
-            else
-                selectorPositionX = 0;
+            if (selectorDestinationRectangles != null)
+            {
+                if (selectorPositionX != selectorDestinationRectangles[0].Length - 1)
+                    selectorPositionX++;
+                else
+                    selectorPositionX = 0;
+            }
         }
         public virtual void Draw(SpriteBatch spritebatch)
         {
-            if (selectorDestinationRectangles2D != null)
-                screenSprite.Draw(spritebatch, selectorDestinationRectangles2D[selectorPositionX][selectorPositionY]);
+            if (selectorDestinationRectangles != null)
+                screenSprite.Draw(spritebatch, selectorDestinationRectangles[selectorPositionY][selectorPositionX]);
             else
-                screenSprite.Draw(spritebatch, selectorDestinationRectangles1D[selectorPositionX]);
+                screenSprite.Draw(spritebatch, Rectangle.Empty);
         }
         public virtual void SelectInstance() { }
         public abstract void Update();

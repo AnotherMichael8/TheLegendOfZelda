@@ -11,17 +11,19 @@ namespace Sprint2_Attempt3.Screens
     public class DeathScreen : AbstractScreen
     {
         private Game1 game;
+        private ICommand[] commandArray;
         public DeathScreen(Game1 game)
         {
             this.game = game;
-            selectorDestinationRectangles1D = new Rectangle[] { new Rectangle(280, 370, 24, 24), new Rectangle(280, 450, 24, 24)};
-            selectorPositionX = 0;
+            Create1DSelector(new Rectangle[] { new Rectangle(324, 368, 24, 24), new Rectangle(324, 448, 24, 24)}, SelectorDirection.Vertical);
+            commandArray = new ICommand[] { new Reset(game), new Quit(game) };
             screenSprite = ScreenSpriteFactory.Instance.CreateDeathScreen();
+
         }
         public override void Update() { }
         public override void SelectInstance()
         {
-            if(sele)
+            commandArray[GetSelectorsPosition(SelectorDirection.Vertical)].Execute();
         }
     }
 }

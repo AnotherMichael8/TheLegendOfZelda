@@ -17,9 +17,5 @@ namespace Sprint2_Attempt3.Screens
             screenSprite = ScreenSpriteFactory.Instance.CreateStartScreen();
         }
         public override void Update() { }
-        public override void Draw(SpriteBatch spritebatch)
-        {
-            screenSprite.Draw(spritebatch, Rectangle.Empty);
-        }
     }
 }

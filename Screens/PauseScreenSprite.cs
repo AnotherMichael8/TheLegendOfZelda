@@ -5,32 +5,30 @@ using Microsoft.Xna.Framework;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Input;
 
 namespace Sprint2_Attempt3.Screens
 {
     public class PauseScreenSprite : IScreenSprite
     {
-        private Texture2D texture;
-        private Rectangle sourceRectangle;
-        private Rectangle destinationRectangle;
-        public PauseScreenSprite(Texture2D texture, Texture2D selectorTexture)
+        private Texture2D screenTexture;
+        private Texture2D selectorTexture;
+        private Rectangle screenSourceRectangle;
+        private Rectangle screenDestinationRectangle;
+        private Rectangle selectorSourceRectangle;
+        public PauseScreenSprite(Texture2D screenTexture, Texture2D selectorTexture)
         {
-            this.texture = texture;
-            sourceRectangle = new Rectangle(638, 12, 300, 196);
-            destinationRectangle = new Rectangle(0, 0, 1060, Globals.ScreenHeight);
+            this.screenTexture = screenTexture;
+            this.selectorTexture = selectorTexture;
+            screenSourceRectangle = new Rectangle(638, 12, 300, 196);
+            screenDestinationRectangle = new Rectangle(0, 0, 1060, Globals.ScreenHeight);
+            selectorSourceRectangle = new Rectangle(52, 230, 8, 8);
         }
-        public void Update()
+        public void Update() { }
+        public void Draw(SpriteBatch spriteBatch, Rectangle selectorDestinationRectangle)
         {
-
-        }
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
-        }
-
-        public void Draw(SpriteBatch spritebatch, Rectangle selectorDestinationRectangles)
-        {
-            throw new NotImplementedException();
+            spriteBatch.Draw(screenTexture, screenDestinationRectangle, screenSourceRectangle, Color.White);
+            spriteBatch.Draw(selectorTexture, selectorDestinationRectangle, selectorSourceRectangle, Color.White);
         }
     }
 }

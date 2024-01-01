@@ -55,6 +55,18 @@
 /processorParam:TextureFormat=Color
 /build:characterGenerationSprite.png
 
+#begin Death_Pause_SaveFile_Screens.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Death_Pause_SaveFile_Screens.png
+
 #begin DeathAndPauseScreen.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -78,6 +90,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:DeathScreen.png
+
+#begin DeathScreenUpdated.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:DeathScreenUpdated.png
 
 #begin Dungeon_Doors.png
 /importer:TextureImporter

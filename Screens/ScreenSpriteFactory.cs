@@ -34,7 +34,7 @@ namespace Sprint2_Attempt3.Screens
         public void LoadAllTextures(ContentManager content)
         {
             startScreenTexture = content.Load<Texture2D>("TitleScreen");
-            deathAndPauseScreenTexture = content.Load<Texture2D>("DeathAndPauseScreen");
+            deathAndPauseScreenTexture = content.Load<Texture2D>("Death_Pause_SaveFile_Screens");
             selectorTexture = content.Load<Texture2D>("FileSelection");
         }
         public IScreenSprite CreateStartScreen()
