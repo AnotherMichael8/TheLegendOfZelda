@@ -16,7 +16,7 @@ namespace Sprint2_Attempt3.CommandClasses
         public LoadSaveFileCommand(Game1 game)
         {
             this.game1 = game;
-            controller = new KeyboardController(game1);
+            controller = new GameplayController(game1);
         }
 
         public void Execute()

@@ -28,7 +28,7 @@ namespace Sprint2_Attempt3.CommandClasses.InventoryCommands
             else if (InventoryController.itemMenuState == InventoryController.ItemMenuState.fullView)
             {
                 InventoryController.itemMenuState = InventoryController.ItemMenuState.movingUp;
-                game1.Controller = new KeyboardController(game1);
+                game1.Controller = new GameplayController(game1);
             }
             game1.gameState = Game1.GameState.itemMenu;
         }

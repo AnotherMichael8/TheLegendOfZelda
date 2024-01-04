@@ -12,38 +12,13 @@ using System.Threading.Tasks;
 
 namespace Sprint2_Attempt3.Controllers
 {
-    public class TitleScreenController : IController
+    public class TitleScreenController : KeyboardController
     {
-        private Game1 game1;
-        private float timeSinceLastUpdate;
-        private Dictionary<Keys, ICommand> commandMapping = new Dictionary<Keys, ICommand>();
-        public TitleScreenController(Game1 game)
+        public TitleScreenController(Game1 game) : base (game) { }
+        public override void RegisterCommands()
         {
-            game1 = game;
-            commandMapping = new Dictionary<Keys, ICommand>();
-            RegisterCommands();
-            timeSinceLastUpdate = 0;
-        }
-        public void RegisterCommands()
-        {
-            commandMapping.Add(Keys.Enter, new SwitchToSaveFilesCommand(game1));    
-        }
-        public void Update(GameTime gameTime)
-        {
-            Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
-            timeSinceLastUpdate += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            if (pressedKeys.Length > 0 && timeSinceLastUpdate > 0.1f)
-            {
-                foreach (Keys key in pressedKeys)
-                {
-                    if (commandMapping.ContainsKey(key))
-                    {
-                        commandMapping[key].Execute();
-                    }
-                }
-                timeSinceLastUpdate = 0;
-            }
+            commandMapping.Add(Keys.Enter, new SwitchToSaveFilesCommand(game));    
+            base.RegisterCommands();
         }
     }
 }

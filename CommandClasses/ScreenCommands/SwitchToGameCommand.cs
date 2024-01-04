@@ -15,7 +15,7 @@ namespace Sprint2_Attempt3.CommandClasses.ScreenCommands
         public SwitchToGameCommand(Game1 game)
         {
             game1 = game;
-            gameplayController = new KeyboardController(game1);
+            gameplayController = new GameplayController(game1);
         }
 
         public void Execute()

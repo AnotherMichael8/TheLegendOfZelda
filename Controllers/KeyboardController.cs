@@ -1,140 +1,59 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
+using Sprint2_Attempt3.CommandClasses.ScreenCommands;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
+using System.Text;
+using System.Threading.Tasks;
 using Sprint2_Attempt3.CommandClasses;
-using Sprint2_Attempt3.CommandClasses.InventoryCommands;
-using Sprint2_Attempt3.CommandClasses.LinkCommands;
 
 namespace Sprint2_Attempt3.Controllers
 {
     public class KeyboardController : IController
     {
-        private Game1 game1;
-        private float timeSinceLastUpdate;
-        private Dictionary<Keys, ICommand> commandMapping = new Dictionary<Keys, ICommand>();
-        private Dictionary<Keys, int> moveKeyTime = new Dictionary<Keys, int>();
-        private List<Keys> moveKeys = new List<Keys>();
-        private int currentMoveKeyValue = 10;
-        private Keys currentMoveKey;
-        private List<Keys> heldKeys = new List<Keys>();
+        protected Game1 game;
+        protected float timeSinceLastUpdate;
+        protected Dictionary<Keys, ICommand> commandMapping;
+        protected List<Keys> heldKeys;
         public KeyboardController(Game1 game)
         {
-            game1 = game;
+            this.game = game;
             commandMapping = new Dictionary<Keys, ICommand>();
+            heldKeys = new List<Keys>();
             RegisterCommands();
             timeSinceLastUpdate = 0;
         }
-        public void RegisterCommands()
+        public virtual void RegisterCommands()
         {
-            //Link movements
-            commandMapping.Add(Keys.W, new MoveLinkUp(game1));
-            commandMapping.Add(Keys.S, new MoveLinkDown(game1));
-            commandMapping.Add(Keys.A, new MoveLinkLeft(game1));
-            commandMapping.Add(Keys.D, new MoveLinkRight(game1));
-            commandMapping.Add(Keys.Up, new MoveLinkUp(game1));
-            commandMapping.Add(Keys.Down, new MoveLinkDown(game1));
-            commandMapping.Add(Keys.Left, new MoveLinkLeft(game1));
-            commandMapping.Add(Keys.Right, new MoveLinkRight(game1));
-            commandMapping.Add(Keys.M, new SetAttackLinkCommand(game1));
-            commandMapping.Add(Keys.None, new SetIdleLinkCommand(game1));
-
-            //other controls
-            commandMapping.Add(Keys.Q, new Quit(game1));
-            commandMapping.Add(Keys.R, new Reset(game1));
-            commandMapping.Add(Keys.Escape, new Pause(game1));
-            commandMapping.Add(Keys.Space, new ToggleItemMenu(game1));
-
-            //Item Menu
-            commandMapping.Add(Keys.P, new UseAItem());
-            commandMapping.Add(Keys.O, new UseBItem());
-
-            moveKeyTime.Add(Keys.W, 0);
-            moveKeyTime.Add(Keys.A, 0);
-            moveKeyTime.Add(Keys.S, 0);
-            moveKeyTime.Add(Keys.D, 0);
-            moveKeyTime.Add(Keys.Up, 0);
-            moveKeyTime.Add(Keys.Down, 0);
-            moveKeyTime.Add(Keys.Left, 0);
-            moveKeyTime.Add(Keys.Right, 0);
-
-            moveKeys = moveKeyTime.Keys.ToList();
-
-            //testing Keys
-            commandMapping.Add(Keys.E, new IncreaseKeyCommand(game1));
-            commandMapping.Add(Keys.T, new IncreaseHealthCommand(game1));
+            commandMapping.Add(Keys.Q, new Quit(game));
+            commandMapping.Add(Keys.R, new Reset(game));
         }
-        public void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
             Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
-            if (game1.gameState == Game1.GameState.pause || game1.gameState == Game1.GameState.linkDead)
+            for (int c = 0; c < heldKeys.Count; c++)
             {
-                if (pressedKeys.Contains(Keys.Enter)) { game1.gameState = Game1.GameState.start; }
-                else if (pressedKeys.Contains(Keys.R)) { commandMapping[Keys.R].Execute(); }
-                else if (pressedKeys.Contains(Keys.Q)) { commandMapping[Keys.Q].Execute(); }
-                else if (pressedKeys.Contains(Keys.S))
+                if (!pressedKeys.Contains(heldKeys[c]))
                 {
-                    ICommand save = new SaveFileCommand();
-                    save.Execute();
+                    heldKeys.Remove(heldKeys[c]);
+                    c--;
                 }
             }
-            else if (game1.gameState == Game1.GameState.start || game1.gameState == Game1.GameState.itemMenu)
-            {
-                bool pressed = false;
-                //go through each movement key incrementing their count by one if they are currently pressed
-                foreach (Keys key in moveKeys)
-                {
-                    if (pressedKeys.Contains(key))
-                    {
-                        pressed = true;
-                        moveKeyTime[key] += 1;
-                        currentMoveKeyValue = moveKeyTime[key];
-                    }
-                    else { moveKeyTime[key] = 0; }
-                }
-                if (!pressed) { currentMoveKey = Keys.None; }
-                //now find most recently pressed movement key
-                foreach (Keys key in moveKeys)
-                {
-                    if (moveKeyTime[key] > 0 && moveKeyTime[key] <= currentMoveKeyValue)
-                    {
-                        currentMoveKeyValue = moveKeyTime[key];
-                        currentMoveKey = key;
-                    }
-                }
-                List<Keys> pressedKeys2 = new List<Keys>();
-                for (int j = 0; j < pressedKeys.Length; j++)
-                {
-                    if (!moveKeys.Contains(pressedKeys[j])) { pressedKeys2.Add(pressedKeys[j]); }
-                }
-                if (currentMoveKey != Keys.None) { pressedKeys2.Add(currentMoveKey); }
 
-                pressedKeys = pressedKeys2.ToArray();
-                for (int c = 0; c < heldKeys.Count; c++)
+            timeSinceLastUpdate += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (pressedKeys.Length > 0 && timeSinceLastUpdate > 0.1f)
+            {
+                foreach (Keys key in pressedKeys)
                 {
-                    if (!pressedKeys.Contains(heldKeys[c]))
+                    if (commandMapping.ContainsKey(key) && !heldKeys.Contains(key))
                     {
-                        heldKeys.Remove(heldKeys[c]);
-                        c--;
+                        commandMapping[key].Execute();
+                        heldKeys.Add(key);
                     }
                 }
-                timeSinceLastUpdate += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                if (pressedKeys.Length > 0 && timeSinceLastUpdate > 0.1f)
-                {
-                    foreach (Keys key in pressedKeys)
-                    {
-                        if (commandMapping.ContainsKey(key) && !heldKeys.Contains(key))
-                        {
-                            commandMapping[key].Execute();
-                            //The if condition hold keys that can be held
-                            if (!moveKeys.Contains(key)) { heldKeys.Add(key); }
-                        }
-                    }
-                    timeSinceLastUpdate = 0;
-                }
-                if (!(pressedKeys.Contains(Keys.W) || pressedKeys.Contains(Keys.S) || pressedKeys.Contains(Keys.A) || pressedKeys.Contains(Keys.D) || pressedKeys.Contains(Keys.Up) || pressedKeys.Contains(Keys.Down) || pressedKeys.Contains(Keys.Left) || pressedKeys.Contains(Keys.Right)))
-                { commandMapping[Keys.None].Execute(); }
+                timeSinceLastUpdate = 0;
             }
         }
     }

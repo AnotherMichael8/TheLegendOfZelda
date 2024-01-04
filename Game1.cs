@@ -31,7 +31,7 @@ namespace Sprint2_Attempt3
         public GameState gameState { get; set; }
         public static Texture2D InventoryTexture { get; set; }
         public IController Controller { get; set; }
-        private MouseController mouseController { get; set; }
+       // private MouseController mouseController { get; set; }
         private InventoryController inventoryController { get; set; }
         public ILink link { get; set; }
         public IRoom room { get; set; }
@@ -83,7 +83,6 @@ namespace Sprint2_Attempt3
             inventoryController = new InventoryController(this);
             room = RoomSecondary.LoadRooms(this);
             Controller = new TitleScreenController(this);
-            mouseController = new MouseController(this);
             deathAnimationActive = false;
         }
         protected override void UnloadContent() { }
@@ -93,7 +92,7 @@ namespace Sprint2_Attempt3
             gameState = GameState.start;
             deathAnimationActive = false;
             collisionManager = new CollisionManager(this, (Link)link);
-            Controller = new KeyboardController(this);
+            Controller = new GameplayController(this);
         }
 
         protected override void Update(GameTime gameTime)
@@ -111,9 +110,6 @@ namespace Sprint2_Attempt3
                     break;
                 case GameState.pause:
                     inventoryController.Update();
-                    break;
-                case GameState.chooseFile:
-                    mouseController.Update(gameTime);
                     break;
                 case GameState.itemMenu:
                     inventoryController.Update();

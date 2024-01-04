@@ -10,58 +10,21 @@ using System.Threading.Tasks;
 
 namespace Sprint2_Attempt3.Controllers
 {
-    public class SelectionScreenController : IController
+    public class SelectionScreenController : KeyboardController
     {
-        private Game1 game1;
-        private float timeSinceLastUpdate;
-        private Dictionary<Keys, ICommand> commandMapping;
-        private List<Keys> heldKeys;
-        public SelectionScreenController(Game1 game)
+        public SelectionScreenController(Game1 game) : base(game) { }
+        public override void RegisterCommands()
         {
-            game1 = game;
-            commandMapping = new Dictionary<Keys, ICommand>();
-            heldKeys = new List<Keys>();
-            RegisterCommands();
-            timeSinceLastUpdate = 0;
-        }
-        public void RegisterCommands()
-        {
-            commandMapping.Add(Keys.W, new MoveSelectorUpCommand(game1));
-            commandMapping.Add(Keys.A, new MoveSelectorLeftCommand(game1));
-            commandMapping.Add(Keys.S, new MoveSelectorDownCommand(game1));
-            commandMapping.Add(Keys.D, new MoveSelectorRightCommand(game1));
-            commandMapping.Add(Keys.Up, new MoveSelectorUpCommand(game1));
-            commandMapping.Add(Keys.Left, new MoveSelectorLeftCommand(game1));
-            commandMapping.Add(Keys.Down, new MoveSelectorDownCommand(game1));
-            commandMapping.Add(Keys.Right, new MoveSelectorRightCommand(game1));
-            commandMapping.Add(Keys.Enter, new SelectItemCommand(game1));
-        }
-        public void Update(GameTime gameTime)
-        {
-            Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
-            for (int c = 0; c < heldKeys.Count; c++)
-            {
-                if (!pressedKeys.Contains(heldKeys[c]))
-                {
-                    heldKeys.Remove(heldKeys[c]);
-                    c--;
-                }
-            }
-
-            timeSinceLastUpdate += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            if (pressedKeys.Length > 0 && timeSinceLastUpdate > 0.1f)
-            {
-                foreach (Keys key in pressedKeys)
-                {
-                    if (commandMapping.ContainsKey(key) && !heldKeys.Contains(key))
-                    {
-                        commandMapping[key].Execute();
-                        heldKeys.Add(key);
-                    }
-                }
-                timeSinceLastUpdate = 0;
-            }
+            commandMapping.Add(Keys.W, new MoveSelectorUpCommand(game));
+            commandMapping.Add(Keys.A, new MoveSelectorLeftCommand(game));
+            commandMapping.Add(Keys.S, new MoveSelectorDownCommand(game));
+            commandMapping.Add(Keys.D, new MoveSelectorRightCommand(game));
+            commandMapping.Add(Keys.Up, new MoveSelectorUpCommand(game));
+            commandMapping.Add(Keys.Left, new MoveSelectorLeftCommand(game));
+            commandMapping.Add(Keys.Down, new MoveSelectorDownCommand(game));
+            commandMapping.Add(Keys.Right, new MoveSelectorRightCommand(game));
+            commandMapping.Add(Keys.Enter, new SelectItemCommand(game));
+            base.RegisterCommands();
         }
     }
 }
