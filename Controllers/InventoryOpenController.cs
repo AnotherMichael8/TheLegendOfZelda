@@ -1,22 +1,23 @@
 ﻿using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
-using Sprint2_Attempt3.CommandClasses;
 using Sprint2_Attempt3.CommandClasses.ScreenCommands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Sprint2_Attempt3.CommandClasses;
+using Sprint2_Attempt3.CommandClasses.InventoryCommands;
 
 namespace Sprint2_Attempt3.Controllers
 {
-    public class SelectionScreenController : IController
+    internal class InventoryOpenController : IController
     {
         private Game1 game1;
         private float timeSinceLastUpdate;
         private Dictionary<Keys, ICommand> commandMapping;
         private List<Keys> heldKeys;
-        public SelectionScreenController(Game1 game)
+        public InventoryOpenController(Game1 game)
         {
             game1 = game;
             commandMapping = new Dictionary<Keys, ICommand>();
@@ -26,15 +27,17 @@ namespace Sprint2_Attempt3.Controllers
         }
         public void RegisterCommands()
         {
-            commandMapping.Add(Keys.W, new MoveSelectorUpCommand(game1));
-            commandMapping.Add(Keys.A, new MoveSelectorLeftCommand(game1));
-            commandMapping.Add(Keys.S, new MoveSelectorDownCommand(game1));
-            commandMapping.Add(Keys.D, new MoveSelectorRightCommand(game1));
-            commandMapping.Add(Keys.Up, new MoveSelectorUpCommand(game1));
-            commandMapping.Add(Keys.Left, new MoveSelectorLeftCommand(game1));
-            commandMapping.Add(Keys.Down, new MoveSelectorDownCommand(game1));
-            commandMapping.Add(Keys.Right, new MoveSelectorRightCommand(game1));
-            commandMapping.Add(Keys.Enter, new SelectItemCommand(game1));
+            commandMapping.Add(Keys.W, new ShiftItemSelectorUp());
+            commandMapping.Add(Keys.A, new ShiftItemSelectorLeft());
+            commandMapping.Add(Keys.S, new ShiftItemSelectorDown());
+            commandMapping.Add(Keys.D, new ShiftItemSelectorRight());
+            commandMapping.Add(Keys.Up, new ShiftItemSelectorUp());
+            commandMapping.Add(Keys.Left, new ShiftItemSelectorLeft());
+            commandMapping.Add(Keys.Down, new ShiftItemSelectorDown());
+            commandMapping.Add(Keys.Right, new ShiftItemSelectorRight());
+            commandMapping.Add(Keys.P, new SetAItem());
+            commandMapping.Add(Keys.O, new SetBItem());
+            commandMapping.Add(Keys.Space, new ToggleItemMenu(game1));
         }
         public void Update(GameTime gameTime)
         {

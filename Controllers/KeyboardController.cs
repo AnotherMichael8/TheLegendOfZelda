@@ -49,12 +49,6 @@ namespace Sprint2_Attempt3.Controllers
             //Item Menu
             commandMapping.Add(Keys.P, new UseAItem());
             commandMapping.Add(Keys.O, new UseBItem());
-            commandMapping.Add(Keys.N, new SetAItem());
-            commandMapping.Add(Keys.B, new SetBItem());
-            commandMapping.Add(Keys.U, new ShiftItemSelectorUp());
-            commandMapping.Add(Keys.J, new ShiftItemSelectorDown());
-            commandMapping.Add(Keys.H, new ShiftItemSelectorLeft());
-            commandMapping.Add(Keys.K, new ShiftItemSelectorRight());
 
             moveKeyTime.Add(Keys.W, 0);
             moveKeyTime.Add(Keys.A, 0);
